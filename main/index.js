@@ -1,4 +1,3 @@
-
 import {tableQuery} from "./queryTable.js"
 
 
