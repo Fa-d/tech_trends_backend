@@ -1,6 +1,5 @@
 import {  DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand } from "@aws-sdk/lib-dynamodb";
-
 import 'dotenv/config';
 
 var awsConfig = {
@@ -10,6 +9,7 @@ var awsConfig = {
         secretAccessKey: `${process.env.SECRET_ACCESS_KEY}`
     }
 }
+
 const command = new PutCommand({
     TableName: "list_feed",
     Item: {

@@ -31,7 +31,7 @@ function processData() {
     });
 }
 
-processData()
+//processData()
 
 function parsingUrl(dataList) {
     console.log(dataList.length)
