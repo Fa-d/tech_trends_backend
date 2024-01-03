@@ -25,63 +25,41 @@ csvParser.on('readable', function () {
     }
 });
 
-createReadStream(fileName).pipe(csvParser).on("end", function () {
+createReadStream(fileName).pipe(csvParser).on("end", async function () {
     parsingUrl()
+
 });
-var motherObject = {};
-function parsingUrl() {
-    xmlList.slice(0, 10).forEach(async elem => {
-        await rssparser.parseURL(elem).then(async feed => {
-            var feedItemList = []
-            feed.items.forEach(element => {
-                feedItemList.push({
-                    title: element.title,
-                    articleUrl: element.link,
-                    pubDate: element.pubDate,
-                    summary: element.summary
-                })
-            })
-            motherObject = {
-                title: feed.title,
-                companySite: feed.link,
-                articleTitle: feed.description,
-                image: feed.image,
-                innerItems: feedItemList
-            }
-        }).then(function () {
-        }).catch(function () {});
-    })
-}
 
+async function parsingUrl() {
 
+    var motherObject = [];
+    await Promise.all(xmlList.slice(10, 13).map(async (xmlUrl) => {
+        const feed = await rssparser.parseURL(xmlUrl);
+        const feedItemList = feed.items.map(element => ({
+            title: element.title || "",
+            articleUrl: element.link || "",
+            pubDate: element.pubDate || "",
+            summary: element.summary || ""
+        }));
 
+        motherObject.push({
+            title: feed.title || "",
+            companySite: feed.link || "",
+            articleTitle: feed.description || "",
+            image: feed.image || "",
+            innerItems: feedItemList || ""
+        });
+    }));
 
-
-var putDataToTable = (async () => {
-    const client = new DynamoDBClient(awsConfig);
-    const response = await client.send(
+    new DynamoDBClient(awsConfig).send(
         new PutCommand({
             TableName: "list_feed",
             Item: {
                 urls: "pk",
                 sort: "sk",
-                url_list: [
-                    {
-                        articleCount: 22,
-                        urlAdress: "http://www.abc929.com"
-                    },
-                    {
-                        articleCount: 21,
-                        urlAdress: "http://www.abc929.com"
-                    },
-                    {
-                        articleCount: 23,
-                        urlAdress: "http://www.abc929.com"
-                    }
-                ],
                 articleData: motherObject
             }
-
         }));
-})();
+}
+
 
