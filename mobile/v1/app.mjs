@@ -1,7 +1,5 @@
 import express from 'express'
-import { dynamicRes } from "../../main/queryTable2.mjs"
-import { putDataToTable } from "../../main/inputItemTable.mjs"
-import { queryXmlParser } from "../../main/xmlParserCsv.js"
+import { dynamicRes } from "../../main/queryTable.js"
 import 'dotenv/config';
 
 const app = express()
@@ -14,11 +12,6 @@ app.get('/tableQuery', async (req, res) => {
   res.send(theRes)
 })
 
-app.get('/putDataToqTable', async (req, res) => {
-  var theRes = await putDataToTable
-  console.log(theRes)
-  res.send(new Date())
-})
 
 app.get('/getTitles', (req, res) => {
   res.send('Hello World!')

@@ -27,11 +27,9 @@ csvParser.on('readable', function () {
 
 createReadStream(fileName).pipe(csvParser).on("end", async function () {
     parsingUrl()
-
 });
 
 async function parsingUrl() {
-
     var motherObject = [];
     await Promise.all(xmlList.slice(10, 13).map(async (xmlUrl) => {
         const feed = await rssparser.parseURL(xmlUrl);

@@ -1,5 +1,7 @@
-import AWS from "aws-sdk";
+import { DynamoDBClient, QueryCommand } from "@aws-sdk/client-dynamodb";
 import 'dotenv/config';
+import AWS from "aws-sdk";
+
 var awsConfig = {
     region: `${process.env.DYNAMO_DB_REGION}`,
     credentials: {
@@ -7,25 +9,21 @@ var awsConfig = {
         secretAccessKey: `${process.env.SECRET_ACCESS_KEY}`
     }
 }
-AWS.config.update(awsConfig);
-const dynamodb = new AWS.DynamoDB(awsConfig);
-
-var tableQuery = function (err, data) {
-    if (err) {
-        console.log("Error", err);
-        return {}
-    } else {
-        return data.Items[0].url_list.L
-    }
-}
-
-var dynamicRes2 = dynamodb.query({
+var paramsListFeed = new QueryCommand({
     TableName: 'list_feed',
     KeyConditionExpression: "urls = :key AND sort = :sort",
     ExpressionAttributeValues: {
-        ":key": { "S": "pk" },
-        ":sort": { "S": "sk" }
+        ":key": { "S": "pk" }, ":sort": { "S": "sk" }
     }
-}, tableQuery)
+})
 
-export { dynamicRes2 };
+
+var dynamicRes = (async () => {
+    const client = new DynamoDBClient(awsConfig);
+    const response = await client.send(paramsListFeed);
+    var formattedResponse = AWS.DynamoDB.Converter.unmarshall(response.Items[0])
+    return formattedResponse.articleData;
+})();
+
+export { dynamicRes };
+
