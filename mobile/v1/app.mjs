@@ -21,7 +21,7 @@ app.get("/parseDataFromNotion", (req, res) => {
   queryXmlParser
 })
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, "localhost", () => {
   console.log(`Example app listening on port ${port}`)
 })
 
