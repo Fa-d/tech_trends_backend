@@ -13,17 +13,47 @@ var paramsListFeed = new QueryCommand({
     TableName: 'list_feed',
     KeyConditionExpression: "urls = :key AND sort = :sort",
     ExpressionAttributeValues: {
-        ":key": { "S": "pk" }, ":sort": { "S": "sk" }
+        ":key": { "S": "pk" },
+        ":sort": { "S": "sk" }
     }
 })
 
+var formattedResponse = {};
+async function dynamicRes() {
+    const response = await new DynamoDBClient(awsConfig).send(paramsListFeed);
+    return AWS.DynamoDB.Converter.unmarshall(response.Items[0])
+}
 
-var dynamicRes = (async () => {
-    const client = new DynamoDBClient(awsConfig);
-    const response = await client.send(paramsListFeed);
-    var formattedResponse = AWS.DynamoDB.Converter.unmarshall(response.Items[0])
-    return formattedResponse.articleData;
-})();
+async function getCategories() {
+    formattedResponse = await dynamicRes()
+    if (!formattedResponse || !formattedResponse.categories) {
+        formattedResponse = await dynamicRes();
+    }
+    return formattedResponse.categories;
+}
 
-export { dynamicRes };
+async function getChildArticles() {
+    formattedResponse = await dynamicRes()
+    if (!formattedResponse || !formattedResponse.childArticles) {
+        formattedResponse = await dynamicRes();
+    }
+    return formattedResponse.childArticles;
+}
+
+async function getMotherArticles() {
+    formattedResponse = await dynamicRes()
+    if (!formattedResponse || !formattedResponse.motherArticles) {
+        formattedResponse = await dynamicRes();
+    }
+    return formattedResponse.motherArticles;
+}
+
+export { getCategories, getChildArticles, getMotherArticles };
+
+//the response is of structure:
+// {
+//     urls: 'pk',
+//     sort: 'sk',
+//     childArticles: [], categories: [],  motherArticles: []
+// }
 
