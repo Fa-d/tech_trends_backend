@@ -1,3 +1,7 @@
-export const main = (): string => 'Hello World';
+import { parsingRss } from './parser/Parser';
+
+export const main = () => {
+  parsingRss()
+};
 
 console.log(main());
