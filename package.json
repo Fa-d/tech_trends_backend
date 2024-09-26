@@ -1,28 +1,31 @@
 {
-  "name": "asw_rss_backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.ts",
-  "type": "module",
+  "name": "tech-tends",
+  "version": "0.0.1",
+  "description": "Project showing rss parsed data",
+  "main": "index.js",
   "scripts": {
-    "test": "nodemon mobile/v1/app.mjs"
+    "clean:dist": "rimraf ./dist",
+    "clean:modules": "rimraf ./node_modules",
+    "clean": "npm run clean:dist && npm run clean:modules",
+    "lint": "npx eslint src/**/*.ts",
+    "lint:fix": "npx eslint --fix src/**/*.ts",
+    "prebuild": "npm run clean:dist",
+    "build": "tsc",
+    "start": "node dist/src/index",
+    "start:dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.484.0",
-    "@aws-sdk/lib-dynamodb": "^3.210.0",
-    "aws-sdk": "^2.809.0",
-    "axios": "^1.6.3",
-    "body-parser": "^1.20.2",
-    "csv": "^6.3.6",
-    "csv-parse": "^5.5.3",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "fs": "^0.0.1-security",
-    "jsonwebtoken": "^9.0.2",
-    "nodemon": "^3.0.3",
-    "object-hash": "^3.0.0",
-    "rss-parser": "^3.13.0"
+  "devDependencies": {
+    "@types/chai": "^4.3.4",
+    "@types/lodash": "^4.14.188",
+    "@types/node": "^18.11.9",
+    "@types/sinon": "^10.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "chai": "^4.3.7",
+    "eslint": "^8.27.0",
+    "rimraf": "^3.0.2",
+    "sinon": "^14.0.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.8.4"
   }
 }
