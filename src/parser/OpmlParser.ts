@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import { XMLParser, XMLBuilder, XMLValidator } from "fast-xml-parser";
 import { readFile } from 'fs';
 import * as xml2js from 'xml2js';
+import { OpmlRepository } from '..//repositories/opml.repository';
 
 interface OpmlOutline {
   text: string;
@@ -25,19 +26,31 @@ export function parseOpml() {
     }
     try {
       xml2js.parseStringPromise(data).then((result) => {
+        var values = []
+        const topicTitle = []
+        const articleTitle = []
+        const rssUrl = []
+        const dates = []
 
         result.opml.body.forEach(element => {
           element.outline.forEach(sameCategoryArt => {
             sameCategoryArt.outline.forEach(indivArticle => {
-              let tempItem = {
-                topicTitle: sameCategoryArt.$.title,
-                articleTitle: indivArticle.$.title,
-                xmlUrl: indivArticle.$.xmlUrl
-              }
+              topicTitle.push(sameCategoryArt.$.title)
+              articleTitle.push(indivArticle.$.title)
+              rssUrl.push(indivArticle.$.xmlUrl)
+              dates.push(new Date())
             });
           })
         })
 
+        values = topicTitle.map((topic, index) => [
+          topic,
+          articleTitle[index],
+          rssUrl[index],
+          dates[index]
+        ])
+
+        new OpmlRepository().saveAllRssUrls(values);
       });
 
     } catch (error) {
