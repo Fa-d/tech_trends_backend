@@ -1,20 +1,16 @@
 import connection from "../db";
 import { FieldPacket, QueryError } from 'mysql2';
+import { OpmlXmlRes } from '../model/allModels';
 
 interface IOpmlRepository {
   saveAllRssUrls(itemList: string[])
 
   getAllRssUrls()
+
+  insertAllFeeds(itemList: string[])
 }
 
 
-export interface OpmlXmlRes {
-  id: number,
-  create_time: string,
-  topic_title: string,
-  article_title: string,
-  rss_url: string
-}
 
 export class OpmlRepository implements IOpmlRepository {
   async saveAllRssUrls(itemList: string[]) {
@@ -36,7 +32,6 @@ export class OpmlRepository implements IOpmlRepository {
         connection.query(sql, (err: QueryError, result: OpmlXmlRes[]) => {
           if (err) throw err;
           resolve(result);
-          console.log('getAllRss: ', result);
         })
       }
       catch (err) {
@@ -44,6 +39,18 @@ export class OpmlRepository implements IOpmlRepository {
         reject(err);
       }
     });
+  }
+
+  async insertAllFeeds(itemList: string[]) {
+    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`)  VALUES ?"
+    try {
+      connection.query(sql, [itemList], (err: QueryError, result: any) => {
+        if (err) throw err;
+        console.log('Insert: ', "saveAllRssUrls");
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
 

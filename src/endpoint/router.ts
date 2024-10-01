@@ -8,7 +8,6 @@ import { OpmlRepository } from '../repositories/opml.repository';
 import { parsingRss } from '../parser/RssParser';
 
 app.get('/parseOpmlToDb', async (req, res) => {
-
   parseOpml()
 })
 
@@ -17,6 +16,11 @@ app.get('/getAllParsedXmlUrls', async (req, res) => {
   res.send(response);
 })
 
+
+app.get('/parseRss', async (req, res) => {
+  parsingRss()
+  res.send(`parseRss`)
+})
 
 app.listen(port, "localhost", () => {
   console.log(`Example app listening on port ${port}`)

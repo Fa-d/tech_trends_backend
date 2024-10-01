@@ -1,26 +1,12 @@
-import * as fs from 'fs';
-import { XMLParser, XMLBuilder, XMLValidator } from "fast-xml-parser";
 import { readFile } from 'fs';
 import * as xml2js from 'xml2js';
 import { OpmlRepository } from '..//repositories/opml.repository';
 
-interface OpmlOutline {
-  text: string;
-  type?: string;
-  xmlUrl?: string;
-  htmlUrl?: string;
-  children?: OpmlOutline[];
-}
-
-interface OpmlDocument {
-  title: string;
-  outlines: OpmlOutline[];
-}
 
 export function parseOpml() {
   const filePath = './asset/feeds.opml';
 
-  fs.readFile(filePath, 'utf8', (err, data) => {
+  readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       return
     }
