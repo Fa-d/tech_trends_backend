@@ -9,6 +9,8 @@ import { parsingRss } from '../parser/RssParser';
 
 app.get('/parseOpmlToDb', async (req, res) => {
   parseOpml()
+  res.send("Done");
+
 })
 
 app.get('/getAllParsedXmlUrls', async (req, res) => {
@@ -18,8 +20,8 @@ app.get('/getAllParsedXmlUrls', async (req, res) => {
 
 
 app.get('/parseRss', async (req, res) => {
-  parsingRss()
-  res.send(`parseRss`)
+  let response = await  parsingRss()
+  res.send(response)
 })
 
 app.listen(port, "localhost", () => {

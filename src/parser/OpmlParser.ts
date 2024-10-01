@@ -35,7 +35,7 @@ export function parseOpml() {
           rssUrl[index],
           dates[index]
         ])
-
+        console.log(values)
         new OpmlRepository().saveAllRssUrls(values);
       });
 

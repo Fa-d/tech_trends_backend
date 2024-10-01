@@ -42,9 +42,9 @@ export class OpmlRepository implements IOpmlRepository {
   }
 
   async insertAllFeeds(itemList: string[]) {
-    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`)  VALUES ?"
+    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`)  VALUES ?;"
     try {
-      connection.query(sql, [itemList], (err: QueryError, result: any) => {
+      connection.query(sql, itemList, (err: QueryError, result: any) => {
         if (err) throw err;
         console.log('Insert: ', "saveAllRssUrls");
       })
