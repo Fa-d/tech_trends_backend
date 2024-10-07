@@ -2,6 +2,16 @@ import connection from "../../infrastructure/db";
 import { QueryError } from 'mysql2';
 import { FeedParent, OpmlXmlRes } from '../models/allModels';
 
+interface IOpmlRepository {
+  saveAllRssUrls(itemList: string[])
+
+  getAllRssUrls()
+
+  insertAllFeeds(itemList: string[][])
+
+
+  getAllFeeds(): Promise<FeedParent[]>
+}
 
 export class OpmlRepository implements OpmlRepository {
   async saveAllRssUrls(itemList: string[]) {
@@ -33,7 +43,7 @@ export class OpmlRepository implements OpmlRepository {
   }
 
   async insertAllFeeds(itemList: string[][]) {
-    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`)  VALUES ?"
+    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`, `feed_topic`)  VALUES ?"
     try {
       connection.query(sql, [itemList], (err: QueryError, result: any) => {
         if (err) throw err;

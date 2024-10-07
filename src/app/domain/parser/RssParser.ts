@@ -23,9 +23,11 @@ export async function parsingRss(): Promise<string[][]> {
             feed.title,
             feed.link,
             feed.feedUrl,
-            mysqlDateStr
+            mysqlDateStr,
+            item.topic_title
           ]
           allFeed.push(tempArray)
+          console.log("fetched: ", feed.link)
         } catch (err) {
           
         }

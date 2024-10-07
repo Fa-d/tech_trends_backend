@@ -1,3 +1,5 @@
+import exp from 'constants';
+
 export interface OpmlXmlRes {
   id: number,
   create_time: string,
@@ -46,3 +48,10 @@ export type FeedParent = {
   title: string,
   lastBuildDate: string
 }
+export type FeedByCategory = {
+  title: string,
+  link: string,
+  feedUrl: string,
+  feed_topic: string,
+}
+

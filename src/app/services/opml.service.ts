@@ -1,4 +1,4 @@
-import { FeedParent, FeedResponse, OpmlXmlRes } from '../models/allModels';
+import { FeedParent, OpmlXmlRes } from '../models/allModels';
 import { OpmlRepository } from '../repositories/opml.dbRepo';
 
 
