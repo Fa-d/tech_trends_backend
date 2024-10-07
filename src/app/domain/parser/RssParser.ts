@@ -1,14 +1,14 @@
 import Parser from 'rss-parser';
-import { OpmlRepository } from '../repositories/opml.repository';
-import { FeedResponse, OpmlXmlRes } from '../model/allModels';
+import { FeedResponse, OpmlXmlRes } from '../../models/allModels';
+import OpmlService from '../../services/opml.service';
 
 
 const parser: Parser<FeedResponse> = new Parser({});
 
-export async function parsingRss(): Promise<string[]> {
-  const opmlRepo = new OpmlRepository()
+export async function parsingRss(): Promise<string[][]> {
+  const opmlService = new OpmlService()
 
-  let response: OpmlXmlRes[] = await opmlRepo.getAllRssUrls()
+  let response: OpmlXmlRes[] = await opmlService.getAllRssUrls()
   var allFeed: any = []
   var feed: FeedResponse
   return new Promise(async (resolve, reject) => {
@@ -30,7 +30,7 @@ export async function parsingRss(): Promise<string[]> {
           
         }
     }
-    opmlRepo.insertAllFeeds(allFeed)
+    opmlService.insertAllFeeds(allFeed)
     resolve(allFeed);
   })
 

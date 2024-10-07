@@ -1,11 +1,12 @@
-import { app } from './endpoint/router';
-
+import { app } from './infrastructure/server';
 const filePath = './asset/feeds.opml';  // Path to your OPML file
 
 export const main = () => {
-  app
+  const port = parseInt(process.env.WEBSERVERPORT) || 5676
+  app.listen(port, "localhost", () => {
+    console.log(`Example app listening on port ${port}`)
+  })
 };
 
 main()
-
 

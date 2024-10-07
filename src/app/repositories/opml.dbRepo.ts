@@ -1,18 +1,9 @@
-import connection from "../db";
-import { FieldPacket, QueryError } from 'mysql2';
-import { OpmlXmlRes } from '../model/allModels';
-
-interface IOpmlRepository {
-  saveAllRssUrls(itemList: string[])
-
-  getAllRssUrls()
-
-  insertAllFeeds(itemList: string[])
-}
+import connection from "../../infrastructure/db";
+import { QueryError } from 'mysql2';
+import { FeedParent, OpmlXmlRes } from '../models/allModels';
 
 
-
-export class OpmlRepository implements IOpmlRepository {
+export class OpmlRepository implements OpmlRepository {
   async saveAllRssUrls(itemList: string[]) {
     const sql = 'INSERT INTO `opml_list`(`topic_title`, `article_title`, `rss_url`, `create_time`) VALUES ?';
     try {
@@ -41,16 +32,31 @@ export class OpmlRepository implements IOpmlRepository {
     });
   }
 
-  async insertAllFeeds(itemList: string[]) {
-    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`)  VALUES ?;"
+  async insertAllFeeds(itemList: string[][]) {
+    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`)  VALUES ?"
     try {
-      connection.query(sql, itemList, (err: QueryError, result: any) => {
+      connection.query(sql, [itemList], (err: QueryError, result: any) => {
         if (err) throw err;
         console.log('Insert: ', "saveAllRssUrls");
       })
     } catch (err) {
       console.log(err)
     }
+  }
+
+
+  async getAllFeeds(): Promise<FeedParent[]> {
+    const sql = `SELECT title, link, feedUrl FROM feeds;`
+    return new Promise((resolve, reject) => {
+      try {
+        connection.query(sql, (err: QueryError, result: FeedParent[]) => {
+          if (err) throw err;
+          resolve(result);
+        })
+      } catch (err) {
+
+      }
+    })
   }
 }
 

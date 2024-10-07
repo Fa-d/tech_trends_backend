@@ -39,3 +39,10 @@ export type FeedResponse = {
   title: string,
   lastBuildDate: string
 };
+
+export type FeedParent = {
+  link: string,
+  feedUrl: string,
+  title: string,
+  lastBuildDate: string
+}
