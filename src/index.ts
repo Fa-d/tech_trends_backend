@@ -1,4 +1,4 @@
-import { app } from './infrastructure/server';
+import app from './infrastructure/server';
 const filePath = './asset/feeds.opml';  // Path to your OPML file
 
 export const main = () => {

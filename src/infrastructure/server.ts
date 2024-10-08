@@ -1,6 +1,9 @@
 import express from 'express';
 import userRoutes from '../app/routes';
 
-export const app = express();
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 userRoutes(app)
 export default app;

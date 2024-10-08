@@ -7,7 +7,7 @@ class FeedService {
   constructor() {
     this.feedService = new FeedRepo()
   }
-  async getAllFeeds() {
+  async getAllFeedsByCategory() {
     let response = await this.feedService.getAllFeedCategory()
     return response
   }
@@ -17,6 +17,10 @@ class FeedService {
     return response
   }
 
+  async getAllFeeds() {
+    let response = await this.feedService.getAllFeeds()
+    return response
+  }
 
 }
 

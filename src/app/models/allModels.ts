@@ -49,6 +49,7 @@ export type FeedParent = {
   lastBuildDate: string
 }
 export type FeedByCategory = {
+  id: number,
   title: string,
   link: string,
   feedUrl: string,

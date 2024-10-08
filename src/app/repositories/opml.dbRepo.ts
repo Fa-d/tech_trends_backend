@@ -13,7 +13,7 @@ interface IOpmlRepository {
   getAllFeeds(): Promise<FeedParent[]>
 }
 
-export class OpmlRepository implements OpmlRepository {
+export class OpmlRepository implements IOpmlRepository {
   async saveAllRssUrls(itemList: string[]) {
     const sql = 'INSERT INTO `opml_list`(`topic_title`, `article_title`, `rss_url`, `create_time`) VALUES ?';
     try {
