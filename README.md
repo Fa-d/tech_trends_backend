@@ -2,12 +2,12 @@
 ### Features to integrate
 
 - [x] DB Query & Response
-- [ ] Integegrate jwt token based session
+- [x] Integegrate jwt token based session
 - [ ] CI-CD Autmation completion
 - [ ] Implement grpc based API
-- [ ] Notification automation
-- [ ] Topics list store into DB
-- [ ] Topic list catagorize
-- [ ] Topic list API
+- [ ] Notification automation (on subscribed new topic)
+- [x] Topics list store into DB
+- [x] Topic list catagorize
+- [x] Topic list API
 - [ ] Add SSL Certificate
-- [ ] More comoing soon
+- [ ] PassportJs for social login

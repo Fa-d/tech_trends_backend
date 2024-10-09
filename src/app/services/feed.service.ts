@@ -7,10 +7,6 @@ class FeedService {
   constructor() {
     this.feedService = new FeedRepo()
   }
-  async getAllFeedsByCategory() {
-    let response = await this.feedService.getAllFeedCategory()
-    return response
-  }
 
   async getFeedsByCategory(category: string) {
     let response = await this.feedService.getFeedsByCategory(category)
@@ -22,6 +18,10 @@ class FeedService {
     return response
   }
 
+  async insertAllFeeds(itemList: string[][]) {
+    this.feedService.insertAllFeeds(itemList);
+
+  }
 }
 
 

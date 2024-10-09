@@ -1,4 +1,4 @@
-import { FeedParent, OpmlXmlRes } from '../models/allModels';
+import { OpmlXmlRes } from '../models/allModels';
 import { OpmlRepository } from '../repositories/opml.dbRepo';
 
 
@@ -11,11 +11,6 @@ class OpmlService {
   }
 
 
-  async getAllFeeds(): Promise<FeedParent[]> {
-    let response = await this.opmlRepo.getAllFeeds()
-    return response
-  }
-
   async getAllRssUrls(): Promise<OpmlXmlRes[]> {
     let response = await this.opmlRepo.getAllRssUrls()
     return response
@@ -23,11 +18,6 @@ class OpmlService {
 
   async saveAllRssUrls(itemList: string[]) {
     this.opmlRepo.saveAllRssUrls(itemList);
-  }
-
-  async insertAllFeeds(itemList: string[][]){
-    this.opmlRepo.insertAllFeeds(itemList);
-
   }
 
 }

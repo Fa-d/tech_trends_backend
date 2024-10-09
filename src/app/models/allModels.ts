@@ -42,12 +42,6 @@ export type FeedResponse = {
   lastBuildDate: string
 };
 
-export type FeedParent = {
-  link: string,
-  feedUrl: string,
-  title: string,
-  lastBuildDate: string
-}
 export type FeedByCategory = {
   id: number,
   title: string,
@@ -56,3 +50,7 @@ export type FeedByCategory = {
   feed_topic: string,
 }
 
+export type FeedCategoryResponse = {
+  id: number,
+  name: string
+}

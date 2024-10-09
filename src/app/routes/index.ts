@@ -1,12 +1,16 @@
 import { parseOpml } from '../domain/parser/OpmlParser';
 import { parsingRss } from '../domain/parser/RssParser';
 import { authenticateToken, generateAccessToken } from '../middlewares/tokenRes';
+import { CategoryListService } from '../services/categorylist.service';
 import FeedService from '../services/feed.service';
+import { FeedListService } from '../services/feedlist.service';
 import OpmlService from '../services/opml.service';
 
 
 const opmlService = new OpmlService()
 const feedService = new FeedService()
+const feedListService = new FeedListService()
+const categoryListService = new CategoryListService()
 
 function userRoutes(app) {
 
@@ -35,8 +39,8 @@ function userRoutes(app) {
     res.status(200).send(response)
   })
 
-  app.get('/getFeedCategory', authenticateToken, async (req, res) => {
-    let response = await feedService.getAllFeedsByCategory()
+  app.get('/getCategories', authenticateToken, async (req, res) => {
+    let response = await categoryListService.getAllCategory()
     res.status(200).send(response)
   })
 

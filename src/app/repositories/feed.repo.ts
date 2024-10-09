@@ -1,24 +1,9 @@
 import { QueryError } from 'mysql2';
 import connection from "../../infrastructure/db";
-import { FeedByCategory, FeedResponse } from '../models/allModels';
+import { FeedByCategory } from '../models/allModels';
 
 export class FeedRepo {
-  async getAllFeedCategory() {
-    const sql = 'SELECT DISTINCT feed_topic FROM feeds';
-    return new Promise((resolve, reject) => {
-      try {
-        connection.query(sql, (err: QueryError, result: string[]) => {
-          if (err) throw err;
-          const topics = result.map(topic => topic['feed_topic']);
-          resolve(topics);
-        })
-      }
-      catch (err) {
-        console.log(err)
-        reject(err);
-      }
-    });
-  }
+
 
   async getFeedsByCategory(category: string) {
     const sql = `SELECT id, title, link, feedUrl, feed_topic FROM feeds WHERE feed_topic = '${category}';`
@@ -35,7 +20,7 @@ export class FeedRepo {
       }
     });
   }
-  
+
   async getAllFeeds() {
     const sql = `SELECT id, title, link, feedUrl, feed_topic FROM feeds;`
     return new Promise((resolve, reject) => {
@@ -50,6 +35,19 @@ export class FeedRepo {
         reject(err);
       }
     });
+  }
+
+
+  async insertAllFeeds(itemList: string[][]) {
+    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`, `feed_topic`)  VALUES ?"
+    try {
+      connection.query(sql, [itemList], (err: QueryError, result: any) => {
+        if (err) throw err;
+        console.log('Insert: ', "saveAllRssUrls");
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
 }
