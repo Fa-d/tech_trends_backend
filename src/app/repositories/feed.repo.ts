@@ -39,7 +39,7 @@ export class FeedRepo {
 
 
   async insertAllFeeds(itemList: string[][]) {
-    const sql = "INSERT INTO `feeds` (`title`, `link`, `feedUrl`, `lastBuildDate`, `feed_topic`)  VALUES ?"
+    const sql = "INSERT INTO `feeds` (`title`, `link`, `feed_url`, `feed_topic`)  VALUES ?"
     try {
       connection.query(sql, [itemList], (err: QueryError, result: any) => {
         if (err) throw err;

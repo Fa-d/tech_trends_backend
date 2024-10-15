@@ -23,13 +23,10 @@ export async function parsingRss(): Promise<any> {
     for (const item of response) {
       try {
         feed = await parser.parseURL(item.rss_url);
-        let mysqlDateStr = new Date(feed.lastBuildDate).toISOString().slice(0, 19).replace('T', ' ');
-
         const tempArray = [
           feed.title,
           feed.link,
           feed.feedUrl,
-          mysqlDateStr,
           item.topic_title
         ]
         allFeed.push(tempArray)

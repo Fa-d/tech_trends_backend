@@ -17,7 +17,7 @@ export class OpmlRepository {
   }
 
   async getAllRssUrls(): Promise<OpmlXmlRes[]> {
-    const sql = "SELECT id,create_time,topic_title,article_title,rss_url FROM opml_list;"
+    const sql = "SELECT id,topic_title,article_title,rss_url FROM opml_list;"
     return new Promise((resolve, reject) => {
       try {
         connection.query(sql, (err: QueryError, result: OpmlXmlRes[]) => {
