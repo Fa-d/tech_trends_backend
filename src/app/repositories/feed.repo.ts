@@ -6,7 +6,7 @@ export class FeedRepo {
 
 
   async getFeedsByCategory(category: string) {
-    const sql = `SELECT id, title, link, feedUrl, feed_topic FROM feeds WHERE feed_topic = '${category}';`
+    const sql = `SELECT id, title, link, feed_url, feed_topic FROM feeds WHERE feed_topic = '${category}';`
     return new Promise((resolve, reject) => {
       try {
         connection.query(sql, (err: QueryError, result: FeedByCategory[]) => {
@@ -22,7 +22,7 @@ export class FeedRepo {
   }
 
   async getAllFeeds() {
-    const sql = `SELECT id, title, link, feedUrl, feed_topic FROM feeds;`
+    const sql = `SELECT id, title, link, feed_url, feed_topic FROM feeds;`
     return new Promise((resolve, reject) => {
       try {
         connection.query(sql, (err: QueryError, result: FeedByCategory[]) => {

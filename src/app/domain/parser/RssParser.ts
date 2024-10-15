@@ -18,7 +18,7 @@ export async function parsingRss(): Promise<any> {
 
   return new Promise(async (resolve, reject) => {
 
-    // let categoryNameId = await categoryNameIdFormat(response, categoryListService);
+     let categoryNameId = await categoryNameIdFormat(response, categoryListService);
 
     for (const item of response) {
       try {
@@ -51,7 +51,7 @@ async function categoryNameIdFormat(response: OpmlXmlRes[], categoryListService:
     topicTitlesArray.push([item]);
   });
 
-  //await categoryListService.insertIntoCategoryItems(topicTitlesArray)
+  await categoryListService.insertIntoCategoryItems(topicTitlesArray)
   var categoryList: FeedCategoryResponse[] = await categoryListService.getAllCategory();
   let categoryNameId = {};
   categoryList.forEach(item => {

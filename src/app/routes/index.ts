@@ -24,7 +24,7 @@ function userRoutes(app) {
     res.status(200).send(response);
   })
 
-  app.get('/getAllParsedXmlUrls', authenticateToken, async (req, res) => {
+  app.get('/getAllParsedXmlUrls',  async (req, res) => {
     let response = await opmlService.getAllRssUrls()
     res.status(200).send(response);
   })
@@ -34,17 +34,17 @@ function userRoutes(app) {
     res.status(200).send(response)
   })
 
-  app.get('/getAllFeeds', authenticateToken, async (req, res) => {
+  app.get('/getAllFeeds', async (req, res) => {
     let response = await feedService.getAllFeeds()
     res.status(200).send(response)
   })
 
-  app.get('/getCategories', authenticateToken, async (req, res) => {
+  app.get('/getCategories', async (req, res) => {
     let response = await categoryListService.getAllCategory()
     res.status(200).send(response)
   })
 
-  app.get('/getFeedsByCategory', authenticateToken, async (req, res) => {
+  app.get('/getFeedsByCategory', async (req, res) => {
     let response = await feedService.getFeedsByCategory(req.query.category)
     res.status(200).send(response)
   })
