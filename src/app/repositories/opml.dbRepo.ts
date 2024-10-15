@@ -5,7 +5,7 @@ import { OpmlXmlRes } from '../models/allModels';
 
 export class OpmlRepository {
   async saveAllRssUrls(itemList: string[]) {
-    const sql = 'INSERT INTO `opml_list`(`topic_title`, `article_title`, `rss_url`, `create_time`) VALUES ?';
+    const sql = 'INSERT INTO `opml_list`(`topic_title`, `article_title`, `rss_url`) VALUES ?';
     try {
       connection.query(sql, [itemList], (err: QueryError, result: any) => {
         if (err) throw err;

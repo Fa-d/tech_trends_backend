@@ -22,8 +22,7 @@ export function parseOpml(opmlService: OpmlService): Promise<any> {
                   [
                     sameCategoryArt.$.title,
                     indivArticle.$.title,
-                    indivArticle.$.xmlUrl,
-                    new Date()
+                    indivArticle.$.xmlUrl
                   ]
                 )
               });
