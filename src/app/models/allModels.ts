@@ -37,7 +37,7 @@ export type FeedItem = {
 export type FeedResponse = {
   items: FeedItem[],
   link: string,
-  feedUrl: string,
+  feed_url: string,
   title: string,
   lastBuildDate: string
 };
@@ -53,4 +53,23 @@ export type FeedByCategory = {
 export type FeedCategoryResponse = {
   id: number,
   name: string
+}
+
+
+export type FeedChildItem = {
+  category_id: number
+  category_name: string
+
+  company_name: string
+  company_site: string
+  company_feed_url: string
+  company_logo_url: string
+  company_description: string
+  
+  feed_title: string
+  feed_content: string
+  feed_image: string
+  feed_author: string
+  feed_article_url: string
+  date_posted: string
 }

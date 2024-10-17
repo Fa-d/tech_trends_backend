@@ -1,33 +1,18 @@
 {
   "version": "0.2.0",
-  "configurations": [
+  "configurations":  [
     {
+      "name": "Example",
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
-      "skipFiles": [
-        "<node_internals>/**",
-        "node_modules/**"
-      ],
-      "program": "${workspaceFolder}/dist/src/index.js",
-      "preLaunchTask": "npm: build",
-      "console": "integratedTerminal"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Mocha Tests",
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": [
-        "-u",
-        "bdd",
-        "--timeout",
-        "999999",
-        "--colors",
-        "${workspaceFolder}/dist/test/**/*.js"
-      ],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
+
+      "args": ["src/index.ts", "--example", "hello"],
+      
+      "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "openOnSessionStart",
-      "preLaunchTask": "npm: build",
-    },
+      "skipFiles": ["<node_internals>/**", "node_modules/**"]
+    }
   ]
 }

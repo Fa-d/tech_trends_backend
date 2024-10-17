@@ -3,13 +3,13 @@ import { parsingRss } from '../domain/parser/RssParser';
 import { authenticateToken, generateAccessToken } from '../middlewares/tokenRes';
 import { CategoryListService } from '../services/categorylist.service';
 import FeedService from '../services/feed.service';
-import { FeedListService } from '../services/feedlist.service';
+import { FeedChildListService } from '../services/feedchildlist.service';
 import OpmlService from '../services/opml.service';
 
 
 const opmlService = new OpmlService()
 const feedService = new FeedService()
-const feedListService = new FeedListService()
+const feedListService = new FeedChildListService()
 const categoryListService = new CategoryListService()
 
 function userRoutes(app) {

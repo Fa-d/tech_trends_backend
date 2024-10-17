@@ -1,16 +1,17 @@
-import { FeedListRepo } from '../repositories/feedlist.repo';
+import { FeedChildListRepo } from '../repositories/feedchildlist.repo';
 
-export class FeedListService {
-  private feedListService: FeedListRepo;
+export class FeedChildListService {
+  private feedListService: FeedChildListRepo;
 
   constructor() {
-    this.feedListService = new FeedListRepo()
+    this.feedListService = new FeedChildListRepo()
   }
 
-  async insertFeedListItems() {
-    let response = await this.feedListService.insertFeedListItems()
+  async insertFeedListItems(itemList: string[][]) {
+    let response = await this.feedListService.insertFeedListItems(itemList)
     return response
   }
+
   async getAllFeedListItems() {
     let response = await this.feedListService.getAllFeedListItems()
     return response
