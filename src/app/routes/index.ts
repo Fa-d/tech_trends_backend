@@ -48,6 +48,17 @@ function userRoutes(app) {
     let response = await feedService.getFeedsByCategory(req.query.category)
     res.status(200).send(response)
   })
+
+  app.get('/getAllFeedChild', async (req, res) => {
+    let response = await feedListService.getAllFeedListItems()
+    res.status(200).send(response)
+  })
+
+  app.get('/getAllFeedChildByCategory', async (req, res) => {
+    let response = await feedListService.getAllFeedListItemByCategory(req.query.category)
+    res.status(200).send(response)
+  })
+
 }
 
 

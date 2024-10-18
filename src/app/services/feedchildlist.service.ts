@@ -16,13 +16,8 @@ export class FeedChildListService {
     let response = await this.feedListService.getAllFeedListItems()
     return response
   }
-  async getAllFeedListItemByCategory() {
-    let response = await this.feedListService.getAllFeedListItemByCategory()
-    return response
-  }
-
-  async getAllCategory() {
-    let response = await this.feedListService.getAllFeedListItemByCategory()
+  async getAllFeedListItemByCategory(category: string) {
+    let response = await this.feedListService.getAllFeedListItemByCategory(category)
     return response
   }
 

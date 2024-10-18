@@ -20,7 +20,7 @@ export class CategoryListRepo {
 
 
   async getAllCategory(): Promise<FeedCategoryResponse[]> {
-    const sql = `SELECT id, name FROM feed_category_list;`
+    const sql = `SELECT id, name FROM feed_category_list WHERE LENGTH(name) < 10;`
     return new Promise((resolve, reject) => {
       try {
         connection.query(sql, (err: QueryError, result: FeedCategoryResponse[]) => {
