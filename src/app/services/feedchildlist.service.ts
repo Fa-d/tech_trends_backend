@@ -21,4 +21,9 @@ export class FeedChildListService {
     return response
   }
 
+  async getFeedById(id: number) {
+    let response = await this.feedListService.getFeedById(id)
+    return response
+  }
+
 }
