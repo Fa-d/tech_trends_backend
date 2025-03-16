@@ -67,4 +67,21 @@ export class FeedChildListRepo {
       }
     });
   }
+
+
+  async getFeedById(id: number) {
+    const sql = `SELECT category_id,category_name, company_name, company_site,company_feed_url, company_logo_url, company_description, feed_title, feed_content, feed_image,  feed_author, feed_article_url, date_posted  FROM feed_child_list WHERE id='${id}'`
+    return new Promise((resolve, reject) => {
+      try {
+        connection.query(sql, (err: QueryError, result: FeedChildItem[]) => {
+          if (err) throw err;
+          resolve(result);
+        })
+      }
+      catch (err) {
+        console.log(err)
+        reject(err);
+      }
+    });
+  }
 }

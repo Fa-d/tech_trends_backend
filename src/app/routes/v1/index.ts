@@ -60,7 +60,19 @@ function userRoutes(app) {
     let response = await feedListService.getAllFeedListItemByCategory(req.query.category)
     res.status(200).send(response)
   })
+  
+  app.post('/getFeedById', async (req, res) => {
+    let response = await feedListService.getFeedById(req.body.id)
+    res.status(200).send(response)
+  })
 
+  app.all('/getFeedById', (req, res, next) => {
+    if (req.method !== 'POST') {
+      res.status(405).send({ error: 'Method Not Allowed. Please use POST method.' });
+    } else {
+      next();
+    }
+  })
   app.get('/getSingleRss', async (req, res) =>{
     await getSingleRss()
     res.status(200).send("Completed Processing ")
