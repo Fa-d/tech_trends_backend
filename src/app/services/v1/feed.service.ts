@@ -1,4 +1,4 @@
-import { FeedRepo } from '../repositories/feed.repo';
+import { FeedRepo } from '../../repositories/v1/feed.repo'
 
 
 class FeedService {

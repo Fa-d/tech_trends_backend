@@ -1,6 +1,6 @@
 import { QueryError } from 'mysql2';
-import connection from "../../infrastructure/db";
-import { FeedCategoryResponse } from '../models/allModels';
+import connection from "../../../infrastructure/db/index";
+import { FeedCategoryResponse } from '../../models/allModels';
 
 export class CategoryListRepo {
   async insertIntoCategoryItems(categoryName: string[][]) {

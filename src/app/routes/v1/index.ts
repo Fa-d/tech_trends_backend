@@ -1,10 +1,12 @@
-import { parseOpml } from '../domain/parser/OpmlParser';
-import { parsingRss } from '../domain/parser/RssParser';
-import { authenticateToken, generateAccessToken } from '../middlewares/tokenRes';
-import { CategoryListService } from '../services/categorylist.service';
-import FeedService from '../services/feed.service';
-import { FeedChildListService } from '../services/feedchildlist.service';
-import OpmlService from '../services/opml.service';
+
+import { parseOpml } from '../../domain/v1/OpmlParser';
+import { parsingRss } from '../../domain/v1/RssParser';
+import getSingleRss from '../../domain/v1/testParser';
+import { authenticateToken, generateAccessToken } from '../../middlewares/tokenRes';
+import { CategoryListService } from '../../services/v1/categorylist.service';
+import FeedService from '../../services/v1/feed.service';
+import { FeedChildListService } from '../../services/v1/feedchildlist.service';
+import OpmlService from '../../services/v1/opml.service';
 
 
 const opmlService = new OpmlService()
@@ -57,6 +59,11 @@ function userRoutes(app) {
   app.get('/getAllFeedChildByCategory', async (req, res) => {
     let response = await feedListService.getAllFeedListItemByCategory(req.query.category)
     res.status(200).send(response)
+  })
+
+  app.get('/getSingleRss', async (req, res) =>{
+    await getSingleRss()
+    res.status(200).send("Completed Processing ")
   })
 
 }

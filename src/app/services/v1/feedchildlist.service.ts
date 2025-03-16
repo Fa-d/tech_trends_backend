@@ -1,4 +1,4 @@
-import { FeedChildListRepo } from '../repositories/feedchildlist.repo';
+import { FeedChildListRepo } from '../../repositories/v1/feedchildlist.repo';
 
 export class FeedChildListService {
   private feedListService: FeedChildListRepo;
@@ -20,5 +20,6 @@ export class FeedChildListService {
     let response = await this.feedListService.getAllFeedListItemByCategory(category)
     return response
   }
+
 
 }

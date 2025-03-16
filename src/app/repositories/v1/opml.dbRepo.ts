@@ -1,6 +1,7 @@
-import connection from "../../infrastructure/db";
+import connection from "../../../infrastructure/db/index";
 import { QueryError } from 'mysql2';
-import { OpmlXmlRes } from '../models/allModels';
+import { OpmlXmlRes } from '../../models/allModels';
+
 
 
 export class OpmlRepository {

@@ -1,6 +1,6 @@
 import { QueryError } from 'mysql2';
-import connection from "../../infrastructure/db";
-import { FeedByCategory } from '../models/allModels';
+import connection from "../../../infrastructure/db/index";
+import { FeedByCategory } from '../../models/allModels';
 
 export class FeedRepo {
 

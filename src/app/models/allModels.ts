@@ -65,11 +65,31 @@ export type FeedChildItem = {
   company_feed_url: string
   company_logo_url: string
   company_description: string
-  
+
   feed_title: string
   feed_content: string
   feed_image: string
   feed_author: string
   feed_article_url: string
   date_posted: string
+}
+
+
+interface OutlineItem {
+  $: {
+    text: string;
+    title: string;
+    type?: string; 
+    xmlUrl?: string; 
+  };
+  outline?: OutlineItem[]; 
+}
+interface BodyItem {
+  outline: OutlineItem[];
+}
+
+export interface OpmlMain {
+  opml: {
+    body: BodyItem[];
+  };
 }

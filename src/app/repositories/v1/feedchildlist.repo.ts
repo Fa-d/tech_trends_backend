@@ -1,6 +1,6 @@
 import { QueryError } from 'mysql2';
-import connection from "../../infrastructure/db";
-import { FeedChildItem } from '../models/allModels';
+import connection from "../../../infrastructure/db/index";
+import { FeedChildItem } from '../../models/allModels';
 
 export class FeedChildListRepo {
   async insertFeedListItems(itemList: string[][]) {

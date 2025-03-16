@@ -1,10 +1,8 @@
 import Parser from 'rss-parser';
-import { FeedCategoryResponse, FeedChildItem, FeedResponse, OpmlXmlRes } from '../../models/allModels';
-import OpmlService from '../../services/opml.service';
-import FeedService from '../../services/feed.service';
-import { CategoryListService } from '../../services/categorylist.service';
-import { FeedChildListService } from '../../services/feedchildlist.service';
-
+import { CategoryListService } from '../../services/v1/categorylist.service';
+import { FeedChildListService } from '../../services/v1/feedchildlist.service';
+import OpmlService from '../../services/v1/opml.service';
+import { FeedResponse, OpmlXmlRes, FeedCategoryResponse } from '../../models/allModels';
 
 const parser: Parser<FeedResponse> = new Parser({});
 
@@ -21,7 +19,7 @@ export async function parsingRss(): Promise<any> {
   return new Promise(async (resolve, reject) => {
     let categoryNameId = await categoryNameIdFormat(response, categoryListService);
 
-    for (const itemResIter of response.slice(51, response.length-1)) {
+    for (const itemResIter of response.slice(51, response.length - 1)) {
       try {
         newFeedRes = await parser.parseURL(itemResIter.rss_url);
         newFeedRes['items'].forEach(item => {
@@ -43,19 +41,19 @@ export async function parsingRss(): Promise<any> {
 
           var newItem = [
             categoryNameId[itemResIter.topic_title], //category id,
-         
+
             itemResIter.topic_title, // category name
             newFeedRes['title'], //company name
             newFeedRes['link'],  // company site url
-          
+
             newFeedRes['feedUrl'], //comany feed url , 
             newFeedRes['image'].url, //company image, 
             newFeedRes['description'],//company description  , 
-          
+
 
             item['title'], //feed title, 
             item['content:encoded'], //main feed article , 
-            feedImage, 
+            feedImage,
 
             item['creator'], //feed author, 
             item['link'],//feed article url, 
@@ -70,7 +68,7 @@ export async function parsingRss(): Promise<any> {
     }
 
     await feedListService.insertFeedListItems(allFeed)
-   // await categoryListService.insertIntoCategoryItems(newCategories)
+    // await categoryListService.insertIntoCategoryItems(newCategories)
     resolve(allFeed);
   })
 

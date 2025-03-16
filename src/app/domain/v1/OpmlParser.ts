@@ -1,6 +1,6 @@
 import { readFile } from 'fs';
 import * as xml2js from 'xml2js';
-import OpmlService from '../../services/opml.service';
+import OpmlService from '../../services/v1/opml.service';
 
 
 export function parseOpml(opmlService: OpmlService): Promise<any> {

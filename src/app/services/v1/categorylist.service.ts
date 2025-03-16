@@ -1,4 +1,4 @@
-import { CategoryListRepo } from '../repositories/categorylist.repo';
+import { CategoryListRepo } from '../../repositories/v1/categorylist.repo';
 
 
 export class CategoryListService {

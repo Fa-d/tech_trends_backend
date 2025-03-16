@@ -1,5 +1,5 @@
-import { OpmlXmlRes } from '../models/allModels';
-import { OpmlRepository } from '../repositories/opml.dbRepo';
+import { OpmlXmlRes } from '../../models/allModels';
+import { OpmlRepository } from '../../repositories/v1/opml.dbRepo';
 
 
 class OpmlService {
