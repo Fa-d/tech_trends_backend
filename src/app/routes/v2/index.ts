@@ -8,9 +8,9 @@ function userRoutesV2(app: Application) {
     
   })
 
-  app.get("/v2/parseRss", (req, res) =>{
-    insertIntoRssList()
-    res.status(200).send("Completed Processing ")
+  app.get("/v2/parseRss",async (req, res) =>{
+    let rssRes = await insertIntoRssList()
+    res.status(200).send(rssRes)
   })
 
 }
